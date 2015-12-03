@@ -1,4 +1,4 @@
-$script = <<SCRIPT
+#!/bin/bash
 
 sudo yum -y update
 
@@ -9,7 +9,7 @@ sudo systemctl enable httpd.service
 sudo rm -rf /var/www/html
 sudo ln -fs /vagrant /var/www/html
 
-# firewall disabled
+# firewall disable
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
 
@@ -25,7 +25,7 @@ sudo yum -y install http://dev.mysql.com/get/mysql-community-release-el7-5.noarc
 sudo yum -y update --enablerepo=epel,remi,remi-php56
 
 # php
-sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mysqlnd php-intl php-pecl-xdebug
+sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mcrypt php-mbstring php-mysqlnd php-intl php-pecl-xdebug
 
 # mysql
 sudo yum -y install mysql mysql-devel mysql-server mysql-utilities
@@ -35,19 +35,3 @@ sudo systemctl enable mysqld.service
 # composer
 curl -s https://getcomposer.org/installer | php
 sudo -s mv composer.phar /usr/local/bin/composer
-
-SCRIPT
-
-VAGRANTFILE_API_VERSION = "2"
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "centos7"
-  config.vm.network "private_network", ip: "192.168.33.10"
-  config.vm.provider :virtualbox do |vbox|
-    vbox.name = "Vagrant_PHP56"
-  end
-  config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
-  end
-  config.vm.provision "shell", inline: $script
-end
