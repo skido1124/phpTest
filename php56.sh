@@ -25,13 +25,9 @@ sudo yum -y install http://dev.mysql.com/get/mysql-community-release-el7-5.noarc
 sudo yum -y update --enablerepo=epel,remi,remi-php56
 
 # php
-sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mcrypt php-mbstring php-mysqlnd php-intl php-pecl-xdebug
+sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mcrypt php-mbstring php-mysqlnd php-intl php-pecl-xdebug php-phpunit-PHPUnit
 
 # mysql
 sudo yum -y install mysql mysql-devel mysql-server mysql-utilities
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
-
-# composer
-curl -s https://getcomposer.org/installer | php
-sudo -s mv composer.phar /usr/local/bin/composer
