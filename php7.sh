@@ -23,16 +23,7 @@ sudo sed -i -e "s/enabled = 1/enabled = 0/g" /etc/yum.repos.d/epel.repo
 sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 sudo sed -i -e "s/enabled = 1/enabled = 0/g" /etc/yum.repos.d/remi.repo
 sudo yum -y install http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-sudo yum -y update --enablerepo=epel,remi,remi-php56
+sudo yum -y update --enablerepo=epel,remi,remi-php70
 
 # php
-sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mcrypt php-mbstring php-mysqlnd php-intl php-pecl-xdebug php-phpunit-PHPUnit
-
-# mysql
-sudo yum -y install mysql mysql-devel mysql-server mysql-utilities
-sudo systemctl start mysqld.service
-sudo systemctl enable mysqld.service
-
-# composer
-curl -s https://getcomposer.org/installer | php
-sudo -s mv composer.phar /usr/local/bin/composer
+sudo yum -y install --enablerepo=remi --enablerepo=remi-php70 php php-opcache php-devel php-mcrypt php-mbstring php-mysqlnd php-intl php-pecl-xdebug php-phpunit-PHPUnit

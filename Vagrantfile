@@ -3,6 +3,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  ###################
+  # DB
+  ###################
   config.vm.define "db" do |db|
     db.vm.box = "centos7"
     db.vm.network "private_network", ip: "192.168.33.10"
@@ -14,7 +18,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     db.vm.provision "shell", :path => "db.sh"
   end
-  
+
+  ###################
+  # PHP 5.6
+  ###################
   config.vm.define "l56" do |web|
     web.vm.box = "centos7"
     web.vm.network "private_network", ip: "192.168.33.20"
@@ -24,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "src/Laravel", "/vagrant/", owner: "apache", group: "apache"
+    web.vm.synced_folder "src/Laravel", "/vagrant/", owner:"apache" ,group:"apache"
     web.vm.provision "shell", :path => "php56.sh"
   end
 
@@ -37,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "src/CakePHP", "/vagrant/", owner: "apache", group: "apache"
+    web.vm.synced_folder "src/CakePHP", "/vagrant/", owner:"apache" ,group:"apache", mount_options: ['dmode=755', 'fmode=666']
     web.vm.provision "shell", :path => "php56.sh"
   end
 
@@ -50,8 +57,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "src/Symfony", "/vagrant/", owner: "apache", group: "apache"
+    web.vm.synced_folder "src/Symfony", "/vagrant/", owner:"apache" ,group:"apache", mount_options: ['dmode=755', 'fmode=666']
     web.vm.provision "shell", :path => "php56.sh"
+  end
+
+  ###################
+  # PHP 7
+  ###################
+  config.vm.define "l7" do |web|
+    web.vm.box = "centos7"
+    web.vm.network "private_network", ip: "192.168.33.70"
+    web.vm.provider :virtualbox do |vbox|
+      vbox.name = "Vagrant_PHP7_Laravel"
+    end
+    web.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+    web.vm.synced_folder "src/Laravel", "/vagrant/", owner:"apache" ,group:"apache", mount_options: ['dmode=755', 'fmode=666']
+    web.vm.provision "shell", :path => "php7.sh"
   end
 
 end
