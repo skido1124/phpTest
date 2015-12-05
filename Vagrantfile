@@ -6,6 +6,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "db" do |db|
     db.vm.box = "centos7"
     db.vm.network "private_network", ip: "192.168.33.10"
+    #db.vm.network "public_network", ip: "192.168.1.15"
     db.vm.provider :virtualbox do |vbox|
       vbox.name = "Vagrant_PHPTest_DB"
     end
@@ -24,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "php56/Laravel", "/vagrant/"
+    web.vm.synced_folder "php56/Laravel", "/vagrant/", owner: "apache", group: "apache"
     web.vm.provision "shell", :path => "php56.sh"
   end
 
@@ -37,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "php56/CakePHP", "/vagrant/"
+    web.vm.synced_folder "php56/CakePHP", "/vagrant/", owner: "apache", group: "apache"
     web.vm.provision "shell", :path => "php56.sh"
   end
 
@@ -50,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "php56/Symfony", "/vagrant/"
+    web.vm.synced_folder "php56/Symfony", "/vagrant/", owner: "apache", group: "apache"
     web.vm.provision "shell", :path => "php56.sh"
   end
 

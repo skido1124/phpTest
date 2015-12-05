@@ -31,3 +31,7 @@ sudo yum -y install --enablerepo=remi --enablerepo=remi-php56 php php-opcache ph
 sudo yum -y install mysql mysql-devel mysql-server mysql-utilities
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld.service
+
+# composer
+curl -s https://getcomposer.org/installer | php
+sudo -s mv composer.phar /usr/local/bin/composer
