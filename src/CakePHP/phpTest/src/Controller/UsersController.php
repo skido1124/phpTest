@@ -16,10 +16,15 @@ class UsersController extends AppController
      *
      * @return void
      */
+//    public function index()
+//    {
+//        $this->set('users', $this->paginate($this->Users));
+//        $this->set('_serialize', ['users']);
+//    }
     public function index()
     {
-        $this->set('users', $this->paginate($this->Users));
-        $this->set('_serialize', ['users']);
+        $this->viewBuilder()->layout('ajax');
+        $this->set('users', $this->Users->find('all'));
     }
 
     /**
