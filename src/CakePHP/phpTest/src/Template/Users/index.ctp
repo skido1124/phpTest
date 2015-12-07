@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Laravel</title>
+        <title>CakePHP</title>
     </head>
     <body>
         <div class="container">

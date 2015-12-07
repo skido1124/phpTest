@@ -57,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "src/Symfony", "/vagrant/", owner:"apache" ,group:"apache"
+    web.vm.synced_folder "src/Symfony", "/vagrant/", owner:"apache" ,group:"apache", mount_options: ['fmode=0777']
     web.vm.provision "shell", :path => "php56.sh"
   end
 
@@ -73,7 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     web.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    web.vm.synced_folder "src/Laravel", "/vagrant/", owner:"apache" ,group:"apache"
+    web.vm.synced_folder "src/Laravel", "/vagrant/", owner:"apache" ,group:"apache", mount_options: ['fmode=0755']
     web.vm.provision "shell", :path => "php7.sh"
   end
 
