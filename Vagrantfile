@@ -22,6 +22,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ###################
   # PHP 5.6
   ###################
+  config.vm.define "php56" do |web|
+      web.vm.box = "centos7"
+      web.vm.network "private_network", ip: "192.168.33.11"
+      web.vm.provider :virtualbox do |vbox|
+        vbox.name = "Vagrant_PHP56"
+      end
+      web.vm.provider "virtualbox" do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
+      end
+      web.vm.synced_folder "src/PHP56", "/vagrant/", owner:"apache" ,group:"apache"
+      web.vm.provision "shell", :path => "php56.sh"
+    end
+
   config.vm.define "l56" do |web|
     web.vm.box = "centos7"
     web.vm.network "private_network", ip: "192.168.33.20"
