@@ -1,0 +1,5 @@
+aws dynamodb put-item --table-name Test --item '{ "id": {"N": "1"}, "first_name": {"S": "Jun"}, "last_name": { "S": "Chiba"}, "Score": {"N": "50"}}'
+aws dynamodb put-item --table-name Test --item '{ "id": {"N": "2"}, "first_name": {"S": "James"}, "last_name": { "S": "Smith"}, "Score": {"N": "50"}}'
+aws dynamodb put-item --table-name Test --item '{ "id": {"N": "3"}, "first_name": {"S": "Robert"}, "last_name": { "S": "Johnson"}, "Score": {"N": "50"}}'
+aws dynamodb put-item --table-name Test --item '{ "id": {"N": "4"}, "first_name": {"S": "David"}, "last_name": { "S": "Wilson"}, "Score": {"N": "50"}}'
+aws dynamodb put-item --table-name Test --item '{ "id": {"N": "5"}, "first_name": {"S": "Richard"}, "last_name": { "S": "Moore"}, "Score": {"N": "50"}}'
